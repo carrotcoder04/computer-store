@@ -1,0 +1,6 @@
+html {
+    font-family: Afacad;
+};
+input::placeholder {
+    font-family: Afacad;
+}
