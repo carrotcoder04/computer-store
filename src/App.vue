@@ -4,6 +4,6 @@
 <script setup>
 import {ref, provide} from "vue";
 
-const isLogin = ref(false);
+const isLogin = ref(true);
 provide("isLogin", isLogin);
 </script>

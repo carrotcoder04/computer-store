@@ -12,7 +12,7 @@
             </span>
         </span>
     <span class="user">
-            <IconUser style="margin-right: 5px;"/>
+            <IconUser style="padding-right: 12px;"/>
             <span v-if="!isLogin">
                 <span class="hover-effect">Đăng kí</span>
                 <span class="separator">|</span>
@@ -29,16 +29,24 @@
             </span>
             <input class="search-content" placeholder="Nhập nội dung tìm kiếm..."/>
         </span>
+        <span class="cart text-bold">
+          <IconCart/>
+          <span class="item-quantity">
+            {{quantity}}
+          </span>
+        </span>
   </div>
 </template>
 <script setup>
-import {inject} from "vue";
+import {inject, ref} from "vue";
 import IconFacebook from "@/components/icons/IconFacebook.vue";
 import IconPhone from "@/components/icons/IconPhone.vue";
 import IconUser from "@/components/icons/IconUser.vue";
 import IconDropdown from "@/components/icons/IconDropdown.vue";
+import IconCart from "@/components/icons/IconCart.vue";
 
 const isLogin = inject("isLogin");
+const quantity = ref(1);
 const openFacebook = () => {
   window.open("https://facebook.com/xuanlinh.noname");
 }
@@ -54,26 +62,22 @@ const openPhone = () => {
   color: white;
   align-items: center;
 }
-
 .body {
   position: relative;
   border: 1px solid red;
   height: 300px;
 }
-
 .contact-group {
   display: flex;
   align-items: center;
   position: absolute;
   left: 5%;
 }
-
 .user {
   display: flex;
   position: absolute;
   right: 5%;
 }
-
 .search-box {
   position: absolute;
   display: flex;
@@ -86,7 +90,6 @@ const openPhone = () => {
   border-radius: 12px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 }
-
 .category {
   display: flex;
   position: absolute;
@@ -101,49 +104,62 @@ const openPhone = () => {
   border: 1px solid rgba(88, 88, 88, 0.507);
   border-radius: 10px;
 }
-
 .category:hover {
   cursor: pointer;
 }
-
 .search-content {
   position: absolute;
   top: 50%;
   right: 8%;
+  transform: translateY(-50%);
   width: 200px;
   height: 30px;
   font-size: 18px;
   border: 0;
   outline: none;
-  transform: translateY(-50%);
 }
-
 .icon {
   margin-left: 12px;
   margin-right: 15px;
+  transition: transform 0.25s;
 }
-
 .text-bold {
   font-weight: 600;
 }
-
 .phone-number {
   color: #FF8888;
   font-size: 21px;
   margin-left: 8px;
   padding-bottom: 2px;
 }
-
 .separator {
   margin-right: 5px;
   margin-left: 5px;
 }
-
+.hover-effect {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 3px;
+}
+.hover-effect::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: max-content;
+  min-width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease-in-out;
+}
 .hover-effect:hover {
-  text-decoration: underline;
   cursor: pointer;
 }
-
+.hover-effect:hover::after {
+  transform: scaleX(1);
+}
 .contact-button {
   display: flex;
   align-items: center;
@@ -151,41 +167,37 @@ const openPhone = () => {
   border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.3);
 }
-
 .contact-button:hover {
   cursor: pointer;
 }
-
 .contact-button:hover .icon {
-  animation: moveUp 0.25s;
-  animation-fill-mode: forwards;
+  transform: translateY(-3px);
 }
-
-.contact-button:not(:hover) .icon {
-  animation: moveDown 0.25s;
-  animation-fill-mode: forwards;
-}
-
 .dropdown-btn {
   position: absolute;
   right: 5%;
 }
-
-@keyframes moveUp {
-  from {
-    transform: translateY(0px);
-  }
-  to {
-    transform: translateY(-3px);
-  }
+.cart {
+  position: absolute;
+  top: 17%;
+  right: calc(50% - 420px);
+  transition: transform 0.2s ease-in-out;
 }
-
-@keyframes moveDown {
-  from {
-    transform: translateY(-3px);
-  }
-  to {
-    transform: translateY(0px);
-  }
+.cart:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+.item-quantity {
+  display: flex;
+  width: 22px;
+  height: 22px;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  background-color: #fa4141;
+  border-radius: 50%;
+  position: absolute;
+  top: -10px;
+  right: -5px;
 }
 </style>
