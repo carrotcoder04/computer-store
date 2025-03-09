@@ -1,6 +1,3 @@
-html {
-    font-family: Afacad;
-};
-input::placeholder {
-    font-family: Afacad;
+body, input, textarea, select, button  {
+    font-family: 'Afacad', sans-serif;
 }
