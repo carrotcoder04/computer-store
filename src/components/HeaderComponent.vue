@@ -1,5 +1,6 @@
 <template>
   <div class="header">
+        <IconHome @click="goHome" class = "icon-home"></IconHome>
         <span class="contact-group">
             <span class="contact-button" style="width: 120px;" @click="openFacebook">
                 <IconFacebook class="icon"/>
@@ -18,7 +19,9 @@
                 <span class="separator">|</span>
                 <span @click="login" class="hover-effect">Đăng nhập</span>
             </span>
-            <span v-else class="hover-effect">Mai Xuân Lĩnh</span>
+            <span v-else class="hover-effect" @click = "toggleMenu">Mai Xuân Lĩnh
+                  <UserMenu ref="userMenu" :items="userProfileFunction" ></UserMenu>
+            </span>
         </span>
   </div>
   <div class="body">
@@ -33,7 +36,7 @@
             </span>
             <input class="search-content" placeholder="Nhập nội dung tìm kiếm..."/>
         </span>
-    <span class="cart text-bold">
+    <span @click="openCart" class="cart text-bold">
               <IconCart style="margin-left: 5px;"/>
               <span class="item-quantity"> {{ quantity }} </span>
               <div>Giỏ hàng</div>
@@ -63,10 +66,36 @@ import IconCart from "@/components/icons/IconCart.vue";
 import IconTruck from "@/components/icons/IconTruck.vue";
 import IconPiggyBank from "@/components/icons/IconPiggyBank.vue";
 import IconRefund from "@/components/icons/IconRefund.vue";
-
+import IconHome from "@/components/icons/IconHome.vue";
+import UserMenu from "@/components/UserMenu.vue";
+const userMenu = ref(null);
 const selectedOption = ref('all');
 const isLogin = inject("isLogin");
 const quantity = ref(0);
+const userProfileFunction = [
+  {
+    text: "Thông tin cá nhân",
+    onClick: () => {
+      window.location.href = "/profile";
+    }
+  },
+  {
+    text: "Đăng xuất",
+    onClick: () => {
+      localStorage.removeItem("isLogin");
+      window.location.href = "/";
+    }
+  }
+]
+const openCart = () => {
+  window.location.href = "/cart";
+}
+const toggleMenu = () => {
+  userMenu.value.toggleDropdown();
+}
+const goHome = () => {
+  window.location.href = "/";
+}
 const login = () => {
   window.location.href = "/login";
 }
@@ -84,7 +113,7 @@ const openPhone = () => {
 .header {
   display: flex;
   background-color: #00A551;
-  height: 45px;
+  height: 60px;
   color: white;
   align-items: center;
 }
@@ -93,7 +122,16 @@ const openPhone = () => {
   position: relative;
   height: 300px;
 }
-
+.icon-home {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  background-color: #007239;
+  right: 7%;
+  padding:5px;
+  border-radius: 30px;
+  cursor: pointer;
+}
 .contact-group {
   display: flex;
   align-items: center;
@@ -208,7 +246,7 @@ select:focus {
 .contact-button {
   display: flex;
   align-items: center;
-  height: 32px;
+  height: 40px;
   border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.3);
 }

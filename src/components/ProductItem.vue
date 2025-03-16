@@ -1,8 +1,8 @@
 <template>
   <span class="product-container">
     <div class="product-item">
-      <IconEdit v-if="isAdmin" class="icon-edit"/>
-      <img :src="imageUrl" alt="" class="product-image">
+      <IconEdit v-if="isAdmin" class="icon-edit" @click="editProduct" />
+      <img :src="imageUrl"  @click ="viewProduct" alt="" class="product-image">
       <div class="product-id">Mã sản phẩm: {{ productId }}</div>
       <div class="product-title">{{ productName }}</div>
       <div class="product-price">{{ formatPrice(price) }}</div>
@@ -37,7 +37,7 @@ import IconClose from "@/components/icons/IconClose.vue";
 import IconCartNoFill from "@/components/icons/IconCartNoFill.vue";
 import IconEdit from "@/components/icons/IconEdit.vue";
 
-defineProps({
+const props = defineProps({
   imageUrl: {
     type: String,
     default: "pc/250-1828-keno-mk200.jpg"
@@ -70,6 +70,12 @@ defineProps({
 const formatPrice = (price) => {
   return price.toLocaleString('vi-VN') + '₫';
 }
+const editProduct = () => {
+  window.location.href = "/edit-product/" + props.productId;
+}
+const viewProduct = () => {
+  window.location.href = "/view/" + props.productId;
+}
 const isAdmin = inject("isAdmin");
 </script>
 <style scoped>
@@ -79,6 +85,7 @@ const isAdmin = inject("isAdmin");
 }
 .icon-edit {
   position: absolute;
+  cursor: pointer;
   right: 10px;
 }
 .align-element-center {
@@ -110,7 +117,7 @@ const isAdmin = inject("isAdmin");
 }
 
 .product-image {
-  width: 100%;
+  width: 80%;
   cursor:pointer;
   height: auto;
   border-radius: 5px;

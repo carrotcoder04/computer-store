@@ -1,7 +1,11 @@
 <template>
+  <title>Trang chủ</title>
   <HeaderComponent/>
   <main>
     <div class="product-list">
+      <ProductCategory/>
+      <ProductCategory/>
+      <ProductCategory/>
       <ProductCategory/>
       <ProductCategory/>
     </div>
@@ -12,6 +16,7 @@
 import HeaderComponent from '@/components/HeaderComponent.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
 import ProductCategory from "@/components/ProductCategory.vue";
+
 </script>
 <style scoped>
 .product-list {

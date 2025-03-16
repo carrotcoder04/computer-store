@@ -1,4 +1,5 @@
 <template>
+  <title>Đăng kí</title>
   <HeaderComponent/>
   <main>
     <div class="container">
@@ -74,16 +75,15 @@ function showNotification(message, color) {
 <style scoped>
 .container {
   padding-top: 30px;
-  padding-bottom: 50px;
-  padding-left: calc(50% - 400px);
+  padding-bottom: 90px;
+  padding-left: calc(50% - 150px);
 }
-
 .welcome {
   font-size: 40px;
   font-weight: 600;
   color: #5e5e5e;
+  transform: translate(-30px);
 }
-
 .auth-form {
   margin-top: 50px;
   display: flex;

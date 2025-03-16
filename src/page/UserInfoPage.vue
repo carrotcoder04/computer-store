@@ -1,21 +1,20 @@
 <template>
-  <title>Đăng nhập</title>
+  <title>Thông tin cá nhân</title>
   <HeaderComponent/>
   <main>
     <div class="container">
-      <div class="welcome">Chào mừng bạn trở lại!</div>
+      <div class="welcome">Thông tin cá nhân</div>
       <div>
         <div class="auth-form">
-          <InputComponent label="Email đăng nhập" v-model="username" type="email" />
-          <InputComponent label="Mật khẩu" v-model="password" type="password"/>
-        </div>
-        <div class="auth-link">
-          <span @click="register" class="register-link">Đăng kí tài khoản</span>
-          <span class="forgot-password">Quên mập khẩu?</span>
+          <InputComponent label="Email" v-model="username" type="email" isDisabled="true" />
+          <InputComponent label="Họ và tên" v-model="fullName"/>
+          <InputComponent label="Số điện thoại" v-model="phoneNumber"/>
+          <SelectComponent :options="genders" label="Giới tính" v-model="gender"/>
+          <InputComponent label="Địa chỉ" v-model="address"/>
         </div>
       </div>
-      <button @click = "login">
-        ĐĂNG NHẬP
+      <button @click = "save">
+        LƯU THÔNG TIN
       </button>
       <NotificationPopup ref="notification"></NotificationPopup>
     </div>
@@ -26,26 +25,37 @@
 import HeaderComponent from '@/components/HeaderComponent.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
 import InputComponent from "@/components/InputComponent.vue";
-import { ref} from "vue";
+import {ref} from "vue";
 import NotificationPopup from "@/components/NotificationPopup.vue";
-const username = ref("");
-const password = ref("");
+import SelectComponent from "@/components/SelectComponent.vue";
+const username = ref("mailinh04.work@gmail.com");
+const fullName = ref("");
+const phoneNumber = ref("");
+const genders = [
+  {
+    value: "male",
+    label: "Nam"
+  },
+  {
+    value: "female",
+    label: "Nữ"
+  }
+]
+const gender = ref("male");
+const address = ref("");
 const notification = ref(null);
-const register = () => {
-  window.location.href = "/register";
-}
-const login = () => {
-  console.log("login");
-  if(username.value === "" || password.value === "") {
-    showNotification("Không thể bỏ trống tài khoản hoặc mật khẩu!","#ff5959");
+const save = () => {
+  if(!username.value ||
+  !fullName.value ||
+  !phoneNumber.value ||
+  !address.value)
+  {
+    showNotification("Không thể bỏ trống trường thông tin nào!!","#ff5959");
     return;
   }
-  showNotification("Đăng nhập thành công!","#8863ff")
-  setTimeout(() => {
-    localStorage.setItem("isLogin",true);
-    window.location.href = "/";
-  },500)
+  showNotification("Lưu thông tin thành công!","#8863ff")
 }
+
 function showNotification(message,color) {
   notification.value.showNotification(message,color)
 }

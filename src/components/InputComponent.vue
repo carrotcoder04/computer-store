@@ -3,7 +3,7 @@
     <label>
       {{label}}
     </label>
-    <input :type="type" v-model="model">
+    <input :type="type" v-model="model" :disabled="isDisabled"/>
   </div>
 </template>
 <script setup>
@@ -12,6 +12,7 @@ const model = defineModel();
 defineProps({
   label: String,
   type: String,
+  isDisabled: Boolean,
 })
 </script>
 <style scoped>
