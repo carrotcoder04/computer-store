@@ -1,6 +1,6 @@
 <template>
   <title>Xem sản phẩm</title>
-  <HeaderComponent/>
+  <HeaderComponent />
   <main>
     <div class="product-page">
       <h2>Core I5 13400F | RTX 3060 12G | Ram 16G | NVME 512G</h2>
@@ -11,8 +11,8 @@
 
       <div class="detail-group">
         <span class="product-image">
-        <img :src="imageUrl" alt="PC Gaming" />
-      </span>
+          <img :src="imageUrl" alt="PC Gaming" />
+        </span>
 
         <ul class="product-details">
           <li>✅ CPU Intel Core i5 13400F</li>
@@ -34,26 +34,29 @@
         </div>
       </div>
 
-      <button class="buy-button">ĐẶT HÀNG NGAY</button>
+      <button @click="order" class="buy-button">ĐẶT HÀNG NGAY</button>
       <p class="delivery-info">Giao hàng tận nơi</p>
     </div>
   </main>
-  <FooterComponent/>
+  <FooterComponent />
 </template>
 <script setup>
-import {defineProps} from "vue";
-import { useRoute } from 'vue-router';
+import { defineProps } from "vue";
+import { useRoute } from "vue-router";
 import FooterComponent from "@/components/FooterComponent.vue";
 import HeaderComponent from "@/components/HeaderComponent.vue";
 defineProps({
   imageUrl: {
     type: String,
-    default: "https://hoanglongcomputer.vn/media/product/1828-keno-mk200.jpg"
-  }
-})
+    default: "https://hoanglongcomputer.vn/media/product/1828-keno-mk200.jpg",
+  },
+});
 const route = useRoute();
 const productId = route.params.id;
 console.log(productId);
+const order = () => {
+  window.location.href = "/cart/" + productId;
+};
 </script>
 <style scoped>
 .product-page {

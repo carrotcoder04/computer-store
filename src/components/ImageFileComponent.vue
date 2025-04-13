@@ -1,23 +1,36 @@
 <template>
-  <div class="upload-container"
-       @dragover.prevent
-       @dragenter.prevent
-       @drop="handleDrop">
+  <div
+    class="upload-container"
+    @dragover.prevent
+    @dragenter.prevent
+    @drop="handleDrop"
+  >
     <p>Kéo & thả ảnh vào đây hoặc</p>
-    <input type="file" accept="image/*" ref="fileInput" @change="handleFileUpload" hidden />
+    <input
+      type="file"
+      accept="image/*"
+      ref="fileInput"
+      @change="handleFileUpload"
+      hidden
+    />
     <button @click="openFileDialog">Chọn tệp</button>
-    <img v-if="imagePreview" :src="imagePreview" alt="Ảnh tải lên" class="preview" />
+    <img
+      v-if="imagePreview"
+      :src="imagePreview"
+      alt="Ảnh tải lên"
+      class="preview"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref,defineProps } from 'vue';
+import { ref, defineProps } from "vue";
 
 const fileInput = ref(null);
 const imagePreview = ref(null);
 const props = defineProps({
-  onFileUpload:Function,
-})
+  onFileUpload: Function,
+});
 const openFileDialog = () => {
   fileInput.value.click();
 };
@@ -51,8 +64,8 @@ const previewImage = (file) => {
 
 <style scoped>
 .upload-container {
-  width: 300px;
-  height: 200px;
+  width: 243px;
+  height: 170px;
   border: 2px dashed #3498db;
   border-radius: 10px;
   display: flex;

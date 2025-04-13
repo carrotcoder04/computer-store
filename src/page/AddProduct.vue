@@ -1,16 +1,12 @@
 <template>
-  <title>Sửa sản phẩm</title>
+  <title>Thêm sản phẩm</title>
   <HeaderComponent />
   <main>
     <div class="container">
-      <div class="welcome">Cập nhật sản phẩm</div>
+      <div class="welcome">Thêm sản phẩm</div>
       <div>
         <div class="auth-form">
-          <InputComponent
-            label="Mã sản phẩm"
-            v-model="productId"
-            isDisabled="true"
-          />
+          <InputComponent label="Mã sản phẩm" v-model="productId" />
           <InputComponent label="Loại sản phẩm" v-model="productType" />
           <InputComponent label="Tên sản phẩm" v-model="productName" />
           <InputComponent label="Giá bán" v-model="price" />
@@ -31,7 +27,7 @@
           />
         </div>
       </div>
-      <button @click="updateProduct">CẬP NHẬT SẢN PHẨM</button>
+      <button @click="addProduct">THÊM SẢN PHẨM</button>
       <NotificationPopup ref="notification"></NotificationPopup>
     </div>
   </main>
@@ -43,11 +39,9 @@ import FooterComponent from "@/components/FooterComponent.vue";
 import InputComponent from "@/components/InputComponent.vue";
 import { ref } from "vue";
 import NotificationPopup from "@/components/NotificationPopup.vue";
-import { useRoute } from "vue-router";
 import ImageFileComponent from "@/components/ImageFileComponent.vue";
 const notification = ref(null);
-const route = useRoute();
-const productId = route.params.id;
+const productId = ref("");
 const productType = ref("");
 const productName = ref("");
 const price = ref(0);
@@ -60,8 +54,8 @@ const onFileUpload = (file) => {
   fileUpload = file;
   console.log(fileUpload);
 };
-const updateProduct = () => {
-  showNotification("Cập nhật thành công!", "#8863FFFF");
+const addProduct = () => {
+  showNotification("Thêm sản phẩm thành công!", "#8863FFFF");
 };
 function showNotification(message, color) {
   notification.value.showNotification(message, color);

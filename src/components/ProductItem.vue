@@ -2,7 +2,7 @@
   <span class="product-container">
     <div class="product-item">
       <IconEdit v-if="isAdmin" class="icon-edit" @click="editProduct" />
-      <img :src="imageUrl"  @click ="viewProduct" alt="" class="product-image">
+      <img :src="imageUrl" @click="viewProduct" alt="" class="product-image" />
       <div class="product-id">Mã sản phẩm: {{ productId }}</div>
       <div class="product-title">{{ productName }}</div>
       <div class="product-price">{{ formatPrice(price) }}</div>
@@ -12,26 +12,25 @@
       </div>
       <div>
         <span v-if="inStock" class="in-stock">
-            <span class="align-element-center" >
-              <IconCheck/>
-              <span style="color:#0FAE80">Còn hàng</span>
-            </span>
-          <span class="align-element-center add-to-cart" >
-          <IconCartNoFill/>
+          <span class="align-element-center">
+            <IconCheck />
+            <span style="color: #0fae80">Còn hàng</span>
+          </span>
+          <span @click="addToCart" class="align-element-center add-to-cart">
+            <IconCartNoFill />
             <span>Thêm vào giỏ</span>
           </span>
         </span>
         <span v-else class="out-of-stock">
-          <IconClose/>
+          <IconClose />
           Hết hàng
         </span>
-
       </div>
     </div>
   </span>
 </template>
 <script setup>
-import {defineProps, inject} from "vue";
+import { defineProps, inject } from "vue";
 import IconCheck from "@/components/icons/IconCheck.vue";
 import IconClose from "@/components/icons/IconClose.vue";
 import IconCartNoFill from "@/components/icons/IconCartNoFill.vue";
@@ -40,7 +39,7 @@ import IconEdit from "@/components/icons/IconEdit.vue";
 const props = defineProps({
   imageUrl: {
     type: String,
-    default: "pc/250-1828-keno-mk200.jpg"
+    default: "pc/250-1828-keno-mk200.jpg",
   },
   productId: {
     type: String,
@@ -48,34 +47,38 @@ const props = defineProps({
   },
   productName: {
     type: String,
-    default: "Core I5 13400F | RTX 2060 6G |Ram 16G | NVME 512G (Wifi / Bluetooth)",
+    default:
+      "Core I5 13400F | RTX 2060 6G |Ram 16G | NVME 512G (Wifi / Bluetooth)",
   },
   price: {
     type: Number,
-    default: 13200000
+    default: 13200000,
   },
   originalPrice: {
     type: Number,
-    default: 14000000
+    default: 14000000,
   },
   discount: {
     type: Number,
-    default: 3
+    default: 3,
   },
   inStock: {
     type: Boolean,
-    default: true
-  }
+    default: true,
+  },
 });
 const formatPrice = (price) => {
-  return price.toLocaleString('vi-VN') + '₫';
-}
+  return price.toLocaleString("vi-VN") + "₫";
+};
 const editProduct = () => {
   window.location.href = "/edit-product/" + props.productId;
-}
+};
 const viewProduct = () => {
   window.location.href = "/view/" + props.productId;
-}
+};
+const addToCart = () => {
+  window.location.href = "/cart/" + props.productId;
+};
 const isAdmin = inject("isAdmin");
 </script>
 <style scoped>
@@ -118,7 +121,7 @@ const isAdmin = inject("isAdmin");
 
 .product-image {
   width: 80%;
-  cursor:pointer;
+  cursor: pointer;
   height: auto;
   border-radius: 5px;
 }
@@ -141,7 +144,7 @@ const isAdmin = inject("isAdmin");
 .in-stock {
   display: flex;
   align-items: center;
-  gap:18px
+  gap: 18px;
 }
 
 .out-of-stock {
@@ -158,7 +161,7 @@ const isAdmin = inject("isAdmin");
 
 .discount {
   margin-left: 10px;
-  color: #FF0000;
+  color: #ff0000;
   font-weight: bold;
 }
 </style>
